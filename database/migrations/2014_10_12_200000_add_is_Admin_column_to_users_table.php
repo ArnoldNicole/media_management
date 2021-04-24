@@ -15,8 +15,8 @@ class AddIsAdminColumnToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
          $table->text('isAdmin')
-                    ->after('name')
-                    ->default('no');
+                    ->after('name');
+                
         });
     }
 
