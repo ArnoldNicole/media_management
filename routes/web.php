@@ -14,7 +14,7 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
-Route::get('/test', 'GuestController@test');
+Route::get('/download/{file}', 'GuestController@download');
 Route::get('/', function () {
     return Inertia::render('Landing', [
         'canLogin' => Route::has('login'),

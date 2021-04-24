@@ -4,7 +4,7 @@ require('./bootstrap');
 import { createApp, h } from 'vue';
 import { App as InertiaApp, plugin as InertiaPlugin } from '@inertiajs/inertia-vue3';
 import { InertiaProgress } from '@inertiajs/progress';
-// import common from './common.js';
+import common from './common.js';
 // import ViewUI from 'view-design';
 // import 'view-design/dist/styles/iview.css';
 // import locale from 'view-design/dist/locale/en-US';
@@ -22,7 +22,7 @@ createApp({
             resolveComponent: (name) => require(`./Pages/${name}`).default,
         }),
 })
-    .mixin({ methods: { route } })
+    .mixin({ methods: { route }, common })
     .use(InertiaPlugin)
     .mount(el);
 
