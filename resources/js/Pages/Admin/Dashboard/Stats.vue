@@ -21,15 +21,6 @@
 		        </div>
 		      </div>
 		    </div>
-		    <p class="text-sm text-gray-500 mt-4">
-		      <span class="mr-2 text-red-900">
-		        <i
-		          class="fas fa-arrow-up"
-		        ></i>
-		        80%
-		      </span>
-		      <span class="whitespace-no-wrap">This are the files in our server as at now</span>
-		    </p>
 		  </div>
 	</div>
 </div>
