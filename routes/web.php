@@ -14,40 +14,38 @@ use Inertia\Inertia;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/download/{file}', 'GuestController@download');
 Route::get('/', function () {
-    return Inertia::render('Landing', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),        
-    ]);
+	return Inertia::render('Landing', [
+		'canLogin' => Route::has('login'),
+		'canRegister' => Route::has('register'),
+	]);
 })->name('welcome');
-
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->name('dashboard');
-
+Route::get('/help', 'GuestController@help')->name('help');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', 'GuestController@dashboard')->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard_stats', 'GuestController@stats')->name('dashboard_stats');
 Route::prefix('user')->middleware(['auth:sanctum', 'verified'])->group(function () {
-	Route::get('/browse','GuestController@files')->name('browse');
+	Route::get('/browse', 'GuestController@files')->name('browse');
 });
 
 Route::prefix('admin')->middleware(['auth:sanctum', 'verified', 'admin'])->group(function () {
-	Route::get('/dashboard', 'AdminController@index')->name('admin');
+	// Route::get('/dashboard', 'AdminController@index')->name('admin');
 	Route::get('/files', 'AdminController@files')->name('files');
 	// Route::get('/requests', 'AdminController@requests')->name('requests');
 	Route::get('/users', 'AdminController@users')->name('users');
 
 
 	//category routes
-	Route::get('/createCategory','AdminController@newCategory')->name('category.create');
-	Route::post('/createCategory','AdminController@createCategory')->name('category.save');
-	Route::get('/file/categories','AdminController@categories')->name('category.list');
-	Route::delete('/deleteCategories','AdminController@deleteCategory')->name('category.delete');
+	Route::get('/createCategory', 'AdminController@newCategory')->name('category.create');
+	Route::post('/createCategory', 'AdminController@createCategory')->name('category.save');
+	Route::get('/file/categories', 'AdminController@categories')->name('category.list');
+	Route::delete('/deleteCategories', 'AdminController@deleteCategory')->name('category.delete');
 
 	//files routes
-	Route::get('/createFile','AdminController@newFile')->name('files.create');
-	Route::get('/createFileThumbail/{file}','AdminController@thumbnail')->name('add.thumbanil');
-	Route::post('/saveFile','AdminController@saveFile')->name('file.create');
-	Route::post('/saveThumbnail','AdminController@saveThumbanil')->name('save.thumbnail');
-	Route::delete('/deleteFile','AdminController@deleteFile')->name('file.delete');
-
+	Route::get('/createFile', 'AdminController@newFile')->name('files.create');
+	Route::get('/createFileThumbail/{file}', 'AdminController@thumbnail')->name('add.thumbanil');
+	Route::post('/saveFile', 'AdminController@saveFile')->name('file.create');
+	Route::post('/saveThumbnail', 'AdminController@saveThumbanil')->name('save.thumbnail');
+	Route::delete('/deleteFile', 'AdminController@deleteFile')->name('file.delete');
 });

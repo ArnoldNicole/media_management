@@ -22,7 +22,8 @@ createApp({
             resolveComponent: (name) => require(`./Pages/${name}`).default,
         }),
 })
-    .mixin({ methods: { route }, common })
+    .mixin({ methods: { route } })
+    .mixin(common)
     .use(InertiaPlugin)
     .mount(el);
 
